@@ -34,7 +34,7 @@ namespace Homies.Tests
                 new Type { Id = 1, Name = "Animals" },
                 new Type { Id = 2, Name = "Fun" }
             });
-
+            // second comment
             _dbContext.SaveChanges();
 
             var mockUser = new ClaimsPrincipal(new ClaimsIdentity(new[]
