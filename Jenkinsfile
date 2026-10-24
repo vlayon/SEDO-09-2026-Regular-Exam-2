@@ -1,24 +1,32 @@
-pipeline{
+
+pipeline {
     agent any
-    stages{
-        stage("Restore"){
-            when{
-                anyOf{
-                    branch "main"
-                }
+
+    stages {
+        stage("Restore") {
+            when {
+                branch "main"
             }
-            steps{
+            steps {
                 bat "dotnet restore"
             }
         }
-        stage("Build"){
-            steps{
+
+        stage("Build") {
+            when {
+                branch "main"
+            }
+            steps {
                 bat "dotnet build --no-restore"
             }
         }
-        stage("Test"){
-            steps{
-                bat "dotnet test --no-build --verbosity normal"
+
+        stage("Test") {
+            when {
+                branch "main"
+            }
+            steps {
+                bat "dotnet test --no-build --no-restore --verbosity normal"
             }
         }
     }
