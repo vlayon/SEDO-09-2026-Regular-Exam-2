@@ -1,6 +1,11 @@
-
+// Jenkins does not see my .net6 installation
 pipeline {
     agent any
+
+    environment {
+        DOTNET_ROOT = 'C:\\Program Files\\dotnet6'
+        PATH = "C:\\Program Files\\dotnet6;${env.PATH}"
+    }
 
     stages {
         stage("Restore") {
@@ -8,7 +13,7 @@ pipeline {
                 branch "main"
             }
             steps {
-                bat "dotnet restore"
+                bat '"C:\\Program Files\\dotnet6\\dotnet.exe" restore Homies.sln'
             }
         }
 
@@ -17,7 +22,7 @@ pipeline {
                 branch "main"
             }
             steps {
-                bat "dotnet build --no-restore"
+                bat '"C:\\Program Files\\dotnet6\\dotnet.exe" build Homies.sln --no-restore'
             }
         }
 
@@ -26,8 +31,9 @@ pipeline {
                 branch "main"
             }
             steps {
-                bat "dotnet test --no-build --no-restore --verbosity normal"
+                bat '"C:\\Program Files\\dotnet6\\dotnet.exe" test Homies.sln --no-build --no-restore --verbosity normal'
             }
         }
     }
 }
+
