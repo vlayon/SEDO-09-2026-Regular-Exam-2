@@ -41,7 +41,7 @@ namespace Homies.Tests
             {
                 new Claim(ClaimTypes.NameIdentifier, "testUserId")
             }));
-
+            //comment
             _controller = new EventController(_dbContext)
             {
                 ControllerContext = new ControllerContext
